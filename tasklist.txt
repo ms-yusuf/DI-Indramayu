@@ -1,0 +1,26 @@
+Tasklist
+1. (done) Ga bisa multiple polylines, alt :
+	a. Iterasi path mesti dipecah [start]-[end] which means bakal lama ngolah data
+2. (done)Infowindows di setiap marker bangunan, dan saluran,
+	(not yet) bikin masing2 variable infowindows utk polylines dan marker
+3. (done) Label di daerah irigasi 
+4. Fungsi pencarian
+5. Input Data
+6. Legenda, mungkin pake overlay
+7. Toggle turn on / off
+8. Auth, pentingkah? 
+
+Note :
+1. Situ Bolang ada 2 polygon jadi ada 2 data daerah irigasi utk situ bolang,
+yang dipake cuma ID 7 | changed, struktur database diubah jadi ada 2 ID : ID utk polygon & daerah irigasi
+2. ID Hardcode penanda untuk bangunan : 
+	1. Pintu Air
+	2. Intake
+	3. Jembatan
+3. ID Hardcode penanda untuk kondisi bangunan :
+	1. Baik
+	2. Rusak
+4. Urutan drawing : polygon (bottom), polylines, marker(top) biar clickable nda ketutup polygon
+5. Bangunan bagi = pintu air
+6. Bangunan Bedung = Intake
+7. Bangunan Lain = Saluran?

@@ -1,0 +1,33 @@
+#map {
+  width: 100%;
+  height: 490px;
+}
+
+.wrapper-map{ 
+	position: relative; 
+}
+#over_map{
+	background-color:grey;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 99; 
+}
+
+#floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+.overlay{
+	background-color:white;
+}
