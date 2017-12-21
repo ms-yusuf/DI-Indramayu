@@ -172,9 +172,30 @@ window.onload = function(e){
 </script>
 <?php 
 ?>
+
+			<div class="panel panel-default">
+                <div class="panel-heading">Informasi</div>
+                <div class="panel-body wrapper-map">
+				Kewenangan : <br> 
+				Luas Areal : <br>
+				Jumlah Bangunan : <br>
+					&nbsp Pintu Air : <br>
+					&nbsp Intake : <br>
+				Jumlah Saluran : <br>
+					&nbsp Sekunder :<br>
+					&nbsp Tersier :<br>
+				Panjang Saluran :<br>
+					&nbsp Sekunder :<br>
+					&nbsp Tersier :<br>
+				Luas Saluran<br>
+					&nbsp Sekunder :<br>
+					&nbsp Tersier :<br>
+
+                </div>
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">Daerah Irigasi</div>
-				
                 <div class="panel-body wrapper-map">
                     <!-- <div id="floating-panel"></div> -->
 					<div id="map"></div>
@@ -182,11 +203,6 @@ window.onload = function(e){
                 </div>
             </div>
 			
-			<div class="panel panel-default">
-                <div class="panel-heading">Informasi</div>
-                <div class="panel-body wrapper-map">
-				
-                </div>
-            </div>
+
 
 @endsection

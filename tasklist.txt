@@ -24,3 +24,11 @@ yang dipake cuma ID 7 | changed, struktur database diubah jadi ada 2 ID : ID utk
 5. Bangunan bagi = pintu air
 6. Bangunan Bedung = Intake
 7. Bangunan Lain = Saluran?
+
+
+Attribut yg kurang dari laporan : 
+Daerah Irigasi : 
+jumlah bangunan(breakdown per item),panjang saluran,kewenangan,luas areal,luas saluran sekunder, luas saluran tersier, keterangan lain
+Saluran :
+
+Bangunan : 
