@@ -4,11 +4,12 @@ Tasklist
 2. (done)Infowindows di setiap marker bangunan, dan saluran,
 	(not yet) bikin masing2 variable infowindows utk polylines dan marker
 3. (done) Label di daerah irigasi 
-4. Fungsi pencarian
+4. Fungsi pencarian 
 5. Input Data
 6. Legenda, mungkin pake overlay
 7. Toggle turn on / off
 8. Auth, pentingkah? 
+9. Detail Bangunan
 
 Note :
 1. Situ Bolang ada 2 polygon jadi ada 2 data daerah irigasi utk situ bolang,
@@ -30,5 +31,16 @@ Attribut yg kurang dari laporan :
 Daerah Irigasi : 
 jumlah bangunan(breakdown per item),panjang saluran,kewenangan,luas areal,luas saluran sekunder, luas saluran tersier, keterangan lain
 Saluran :
-
 Bangunan : 
+
+--------------------------------------------------------------------------------------------------------------------------------
+ADE M.
+Kewenangan : (tambah field baru di tablenya)
+Luas Areal : (tambah field baru di tablenya)
+Jumlah Bangunan : (query count tabel bangunan_irigasi) where DI=$ID
+  Pintu Air : 
+  Intake : 
+Jumlah Saluran : 
+  Sekunder :
+  Tersier :
+Panjang Saluran, Luas Saluran

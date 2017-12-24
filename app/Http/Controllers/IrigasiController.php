@@ -13,6 +13,12 @@ class IrigasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	 
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	 
     public function index()
     {
 		$bangunan = DB::table('bangunan_irigasi')->get();
@@ -56,7 +62,6 @@ class IrigasiController extends Controller
      */
     public function show($id)
     {
-
 		$bangunan = DB::table('bangunan_irigasi')->where('daerah_irigasi',$id)->get();
 		$bangunan = $bangunan->toArray();
 		

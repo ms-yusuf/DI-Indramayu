@@ -26,6 +26,7 @@ window.onload = function(e){
       mapTypeId: 'satellite',
 	  lat: latcenter,
 	  lng: lngcenter,
+	  streetViewControl: false,
 	  zoom: 16,
 	  click: function(e) {
 		//alert(e.latLng);
@@ -165,6 +166,8 @@ window.onload = function(e){
 		  }
 		});	
 	}
+	var legend = document.getElementById('legend');
+	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
 
 	
@@ -176,7 +179,7 @@ window.onload = function(e){
 			<div class="panel panel-default">
                 <div class="panel-heading">Informasi</div>
                 <div class="panel-body wrapper-map">
-				Kewenangan : <br> 
+				Kewenangan : <input type="text" value="test"><br> 
 				Luas Areal : <br>
 				Jumlah Bangunan : <br>
 					&nbsp Pintu Air : <br>
@@ -190,7 +193,7 @@ window.onload = function(e){
 				Luas Saluran<br>
 					&nbsp Sekunder :<br>
 					&nbsp Tersier :<br>
-
+				BUTTON
                 </div>
             </div>
 
@@ -199,7 +202,16 @@ window.onload = function(e){
                 <div class="panel-body wrapper-map">
                     <!-- <div id="floating-panel"></div> -->
 					<div id="map"></div>
-					<!-- <div id="over_map">keterangan</div> -->
+							<div class="legenda" id="legend">
+						<h4>Legenda</h4>
+						<div class="legenda-item">
+							<img src="{{ asset('/images/icon-intake.png') }}">
+							<p> Intake </p> 
+							<hr>
+							<img src="{{ asset('/images/icon-pintuair.png') }}">
+							<p> Pintu Air </p> <br>
+						</div>
+					</div>				<!-- <div id="over_map">keterangan</div> -->
                 </div>
             </div>
 			

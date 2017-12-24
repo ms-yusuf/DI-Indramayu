@@ -9,6 +9,7 @@ namespace pupr\Http\Controllers;
 
 use pupr\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
 
 /**
  * Class HomeController
@@ -33,6 +34,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+		$jumlahBangunan = DB::table('bangunan_irigasi')->count();
+		$jumlahDaerah = DB::table('daerah_irigasi')
+                 ->select('nama', DB::raw('count(*) as total'))
+                 ->groupBy('id_di')
+                 ->get();
+		$result = count($jumlahDaerah);
+		$jumlahSaluran = DB::table('sodetan')->count();
+		
+		$jumlahBangunanIntake = DB::table('bangunan_irigasi')->where('jenis',2)->count();
+		$jumlahBangunanPintu = DB::table('bangunan_irigasi')->where('jenis',1)->count();
+		
+		
+        return view('adminlte::home',compact('jumlahBangunan','result','jumlahSaluran','jumlahBangunanPintu'));
     }
 }

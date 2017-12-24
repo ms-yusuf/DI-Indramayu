@@ -12,9 +12,9 @@
 			  <!-- small box -->
 			  <div class="small-box bg-aqua">
 				<div class="inner">
-				  <h3>150</h3>
+				  <h3>{{ $jumlahBangunan }}</h3>
 
-				  <p>Jalur Irigasi</p>
+				  <p>Bangunan</p>
 				</div>
 				<div class="icon">
 				  <i class="glyphicon glyphicon-stats"></i>
@@ -26,21 +26,7 @@
 			  <!-- small box -->
 			  <div class="small-box bg-green">
 				<div class="inner">
-				  <h3>23<sup style="font-size: 20px"></sup></h3>
-
-				  <p>Sungai</p>
-				</div>
-				<div class="icon">
-				  <i class="glyphicon glyphicon-stats"></i>
-				</div>
-			  </div>
-			</div>
-			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
-			  <!-- small box -->
-			  <div class="small-box bg-yellow">
-				<div class="inner">
-				  <h3>4</h3>
+				  <h3>{{$result}}<sup style="font-size: 20px"></sup></h3>
 
 				  <p>Daerah Irigasi</p>
 				</div>
@@ -52,11 +38,25 @@
 			<!-- ./col -->
 			<div class="col-lg-3 col-xs-6">
 			  <!-- small box -->
+			  <div class="small-box bg-yellow">
+				<div class="inner">
+				  <h3>{{$jumlahSaluran}}</h3>
+
+				  <p>Jumlah Saluran</p>
+				</div>
+				<div class="icon">
+				  <i class="glyphicon glyphicon-stats"></i>
+				</div>
+			  </div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+			  <!-- small box -->
 			  <div class="small-box bg-red">
 				<div class="inner">
-				  <h3>2</h3>
+				  <h3>{{$jumlahBangunanPintu}}</h3>
 
-				  <p>Bendungan </p>
+				  <p>Pintu Air </p>
 				</div>
 				<div class="icon">
 				  <i class="glyphicon glyphicon-stats"></i>
