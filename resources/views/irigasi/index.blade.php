@@ -1,8 +1,7 @@
 <!-- create.blade.php -->
-@extends('adminlte::layouts.app')
-@extends('bangunan')
+@extends('irigasi')
 
-@section('content')
+
 <script type="text/javascript">
 window.onload = function(e){ 
 	var APP_URL = {!! json_encode(url('/')) !!}
@@ -152,25 +151,12 @@ window.onload = function(e){
 				layer: 'overlayLayer',
 			});
 		}
-		console.log(label);
-	//google.maps.event.addListenerOnce(map.map, 'idle', function(){
-			//console.log(boundaryDaerah.map);
-			//var lat1 = boundaryDaerah.getPosition().getCenter.lat();
-			//var lng1 = boundaryDaerah.getPosition().getCenter.lng();
-			// map.drawOverlay({
-				// lat: -6.325466,
-				// lng: 108.327932,
-				// content: '<div class="overlay"> test </div>'
-			// });
-	// });
 	return boundaryDaerah;
     }
-
-	
 }
 </script>
-<?php 
-?>
+
+@section('content')
             <div class="panel panel-default">
                 <div class="panel-heading">Daerah Irigasi</div>
 				

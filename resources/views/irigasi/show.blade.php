@@ -1,8 +1,6 @@
 <!-- create.blade.php -->
-@extends('adminlte::layouts.app')
-@extends('bangunan')
+@extends('irigasi')
 
-@section('content')
 <script type="text/javascript">
 window.onload = function(e){ 
 	var APP_URL = {!! json_encode(url('/')) !!}
@@ -167,158 +165,167 @@ window.onload = function(e){
 		});	
 	}
 	var legend = document.getElementById('legend');
-	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-
-
-	
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);	
 }
 </script>
-<?php 
-?>
 
-	<div class="panel panel-default">
-                <div class="panel-heading">Informasi</div>
-                <div class="panel-body wrapper-map">
-							<div class="row">
-								<div class="col-md-2">
-									<p>Kewenangan</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[0]->kewenangan }}">
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p>Luas Areal</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[0]->luas_area }}">
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p>Jumlah Bangunan</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $jml_bangunan }}" disabled>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Pintu Air</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $jml_pintu_air }}" disabled>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Intake</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $jml_intake }}" disabled>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p>Jumlah Saluran</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $jml_saluran }}" disabled>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Sekunder</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $jml_sekunder }}" disabled>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Tersier</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $jml_tersier }}" disabled>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p>Panjang Saluran</p>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Sekunder</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[0]->ps_sekunder }}" >
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Tersier</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[0]->ps_tersier }}" >
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p>Luas Saluran</p>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Sekunder</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[0]->ls_sekunder }}">
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-2">
-									<p style="margin-left: 20px;">Tersier</p>
-								</div>
-								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[0]->ls_tersier }}">
-								</div>
-							</div>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Daerah Irigasi</div>
-                <div class="panel-body wrapper-map">
-                    <!-- <div id="floating-panel"></div> -->
-					<div id="map"></div>
-							<div class="legenda" id="legend">
-						<h4>Legenda</h4>
-						<div class="legenda-item">
-							<img src="{{ asset('/images/icon-intake.png') }}">
-							<p> Intake </p> 
-							<hr>
-							<img src="{{ asset('/images/icon-pintuair.png') }}">
-							<p> Pintu Air </p> <br>
-						</div>
-					</div>				<!-- <div id="over_map">keterangan</div> -->
-                </div>
-            </div>
+@section('content')
+<div class="row">
+	<div class="col-md-12">
+		<!-- Default box -->
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">Informasi Daerah Irigasi</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+						<i class="fa fa-minus"></i></button>
+				</div>
+			</div>
 			
+			<div class="box-body">
+						<div class="row">
+							<div class="col-md-2">
+								<p>Kewenangan</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $datas[0]->kewenangan }}">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p>Luas Areal</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $datas[0]->luas_area }}">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p>Jumlah Bangunan</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $jml_bangunan }}" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Pintu Air</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $jml_pintu_air }}" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Intake</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $jml_intake }}" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p>Jumlah Saluran</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $jml_saluran }}" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Sekunder</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $jml_sekunder }}" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Tersier</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $jml_tersier }}" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p>Panjang Saluran</p>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Sekunder</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $datas[0]->ps_sekunder }}" >
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Tersier</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $datas[0]->ps_tersier }}" >
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p>Luas Saluran</p>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Sekunder</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $datas[0]->ls_sekunder }}">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">
+								<p style="margin-left: 20px;">Tersier</p>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" value="{{ $datas[0]->ls_tersier }}">
+							</div>
+						</div>
+			
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
 
+	</div>
+</div>	
 
+<div class="panel panel-default">
+	<div class="panel-heading">Daerah Irigasi</div>
+	<div class="panel-body wrapper-map">
+		<!-- <div id="floating-panel"></div> -->
+		<div id="map"></div>
+				<div class="legenda" id="legend">
+			<h4>Legenda</h4>
+			<div class="legenda-item">
+				<img src="{{ asset('/images/icon-intake.png') }}">
+				<p> Intake </p> 
+				<hr>
+				<img src="{{ asset('/images/icon-pintuair.png') }}">
+				<p> Pintu Air </p> <br>
+			</div>
+		</div>				<!-- <div id="over_map">keterangan</div> -->
+	</div>
+</div>
 @endsection
