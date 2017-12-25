@@ -62,6 +62,33 @@ class IrigasiController extends Controller
      */
     public function show($id)
     {
+		
+        $jml_bangunan = DB::table('bangunan_irigasi')
+                ->where('daerah_irigasi', $id)
+                ->count();
+        $jml_saluran = DB::table('sodetan')
+                ->where('daerah_irigasi', $id)
+                ->count();
+        
+        $jml_pintu_air = DB::table('bangunan_irigasi')
+                ->where('daerah_irigasi', $id)
+                ->where('jenis', 1) 
+                ->count();
+        $jml_intake = DB::table('bangunan_irigasi')
+                ->where('daerah_irigasi', $id)
+                ->where('jenis', 2) 
+                ->count();
+
+        $jml_sekunder = DB::table('sodetan')
+                ->where('daerah_irigasi', $id)
+                ->where('jenis', 2) 
+                ->count();
+
+        $jml_tersier = DB::table('sodetan')
+                ->where('daerah_irigasi', $id)
+                ->where('jenis', 3) 
+                ->count();		
+		
 		$bangunan = DB::table('bangunan_irigasi')->where('daerah_irigasi',$id)->get();
 		$bangunan = $bangunan->toArray();
 		
@@ -80,7 +107,9 @@ class IrigasiController extends Controller
 		$datas = DB::table('daerah_irigasi')->where('id_di',$id)->get();
 		$datas = $datas->toArray();
 		//$datas = Irigasi::where('id',$id)->toArray(); cara wherenya salah
-        return view('irigasi.show', compact('datas','sodetan_tersier','sodetan_sekunder','bangunan'));
+        return view('irigasi.show', 
+            compact('datas','sodetan_tersier','sodetan_sekunder','bangunan', 'jml_bangunan', 'jml_pintu_air', 'jml_intake', 'jml_sekunder', 'jml_tersier', 'jml_saluran')
+		);
     }
 
     /**

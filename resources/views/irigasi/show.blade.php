@@ -176,24 +176,128 @@ window.onload = function(e){
 <?php 
 ?>
 
-			<div class="panel panel-default">
+	<div class="panel panel-default">
                 <div class="panel-heading">Informasi</div>
                 <div class="panel-body wrapper-map">
-				Kewenangan : <input type="text" value="test"><br> 
-				Luas Areal : <br>
-				Jumlah Bangunan : <br>
-					&nbsp Pintu Air : <br>
-					&nbsp Intake : <br>
-				Jumlah Saluran : <br>
-					&nbsp Sekunder :<br>
-					&nbsp Tersier :<br>
-				Panjang Saluran :<br>
-					&nbsp Sekunder :<br>
-					&nbsp Tersier :<br>
-				Luas Saluran<br>
-					&nbsp Sekunder :<br>
-					&nbsp Tersier :<br>
-				BUTTON
+							<div class="row">
+								<div class="col-md-2">
+									<p>Kewenangan</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $datas[1]->kewenangan }}">
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p>Luas Areal</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $datas[1]->luas_area }}">
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p>Jumlah Bangunan</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $jml_bangunan }}" disabled>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Pintu Air</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $jml_pintu_air }}" disabled>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Intake</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $jml_intake }}" disabled>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p>Jumlah Saluran</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $jml_saluran }}" disabled>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Sekunder</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $jml_sekunder }}" disabled>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Tersier</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $jml_tersier }}" disabled>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p>Panjang Saluran</p>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Sekunder</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $datas[1]->ps_sekunder }}" >
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Tersier</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $datas[1]->ps_tersier }}" >
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p>Luas Saluran</p>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Sekunder</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $datas[1]->ls_sekunder }}">
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-2">
+									<p style="margin-left: 20px;">Tersier</p>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" value="{{ $datas[1]->ls_tersier }}">
+								</div>
+							</div>
                 </div>
             </div>
 
