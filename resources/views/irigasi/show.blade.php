@@ -184,7 +184,7 @@ window.onload = function(e){
 									<p>Kewenangan</p>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[1]->kewenangan }}">
+									<input type="text" class="form-control" value="{{ $datas[0]->kewenangan }}">
 								</div>
 							</div>
 							<br>
@@ -193,7 +193,7 @@ window.onload = function(e){
 									<p>Luas Areal</p>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[1]->luas_area }}">
+									<input type="text" class="form-control" value="{{ $datas[0]->luas_area }}">
 								</div>
 							</div>
 							<br>
@@ -262,7 +262,7 @@ window.onload = function(e){
 									<p style="margin-left: 20px;">Sekunder</p>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[1]->ps_sekunder }}" >
+									<input type="text" class="form-control" value="{{ $datas[0]->ps_sekunder }}" >
 								</div>
 							</div>
 							<br>
@@ -271,7 +271,7 @@ window.onload = function(e){
 									<p style="margin-left: 20px;">Tersier</p>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[1]->ps_tersier }}" >
+									<input type="text" class="form-control" value="{{ $datas[0]->ps_tersier }}" >
 								</div>
 							</div>
 							<br>
@@ -286,7 +286,7 @@ window.onload = function(e){
 									<p style="margin-left: 20px;">Sekunder</p>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[1]->ls_sekunder }}">
+									<input type="text" class="form-control" value="{{ $datas[0]->ls_sekunder }}">
 								</div>
 							</div>
 							<br>
@@ -295,7 +295,7 @@ window.onload = function(e){
 									<p style="margin-left: 20px;">Tersier</p>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" value="{{ $datas[1]->ls_tersier }}">
+									<input type="text" class="form-control" value="{{ $datas[0]->ls_tersier }}">
 								</div>
 							</div>
                 </div>
