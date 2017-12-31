@@ -2,7 +2,7 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-	{{ trans('adminlte_lang::message.home') }}
+	{{ trans('Bangunan') }}
 @endsection
 
 @section('main-content')

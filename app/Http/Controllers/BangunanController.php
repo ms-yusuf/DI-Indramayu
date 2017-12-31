@@ -4,7 +4,7 @@ namespace pupr\Http\Controllers;
 
 use Illuminate\Http\Request;
 use pupr\Bangunan;
-
+use DB;
 
 class BangunanController extends Controller
 {
@@ -15,8 +15,14 @@ class BangunanController extends Controller
      */
     public function index()
     {
+		//PINTU AIR
+		$bangunan = DB::table('bangunan_irigasi')->where('jenis',1)->get();
+		$bangunan = $bangunan->toArray();
+		$i = 1;
+		
         $datas = Bangunan::all()->toArray();
-        return view('bangunan.index', compact('datas'));
+		//dd($datas);
+        return view('bangunan.index', compact('datas','bangunan','i'));
     }
 
     /**

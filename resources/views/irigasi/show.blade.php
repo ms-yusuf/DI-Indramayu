@@ -57,34 +57,47 @@ window.onload = function(e){
     }
 	
 	//bangunan
-	var marker = [];
-	for(var i=0; i<bangunan.length;i++){
-		var jenis = bangunan[i]['jenis'];
-		var lat = bangunan[i]['lat'];
-		var lng = bangunan[i]['lng'];		
-		
-		
-	  var contentString = '<div id="content">'+
+	infowindow = new google.maps.InfoWindow();
+	
+	//////////////////MARKER BANGUNAN
+	function infoBangunan(id,kondisi){
+	if(kondisi==2){
+		var kondisi =       'Kondisi : <select name="kondisi">' +
+	  '<option value="1">Baik</option>'+
+	'<option value="2" selected>Rusak</option>'+
+	'</select> <br> ';
+	}else{
+	    var kondisi =       'Kondisi : <select name="kondisi">' +
+	  '<option value="1" selected>Baik</option>'+
+	'<option value="2">Rusak</option>'+
+	'</select> <br> ';
+	}
+	
+	contentStringBangunan = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Panel Info</h1>'+
       '<div id="bodyContent">'+
       '<p><b>Keterangan Bangunan</b><br>' +
-      'Kondisi : <br> '+
-      'Dimensi :  <br>'+
-      'Foto</p> <br>'+
-      '<p>Detail :  <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'Page</a> '+
+      '<form action="" method="post">' + kondisi + 
+      'Dimensi : <input type="text" value="'+dimensi+'">  M<br>'+
+      'Foto</p> <br> <input type="file"> '+
+      '</form>'+
       '</div>'+
       '</div>';
-
-		var infowindow = new google.maps.InfoWindow({
-			content: contentString
-		});
+	  return contentStringBangunan;
+	  }
+	for(var i=0; i<bangunan.length;i++){
+		var id = bangunan[i]['id'];
+		var kondisi = bangunan[i]['kondisi'];
+		var dimensi = bangunan[i]['dimensi'];
+		var jenis = bangunan[i]['jenis'];
+		var lat = bangunan[i]['lat'];
+		var lng = bangunan[i]['lng'];		
 		
 		//1 pintu air, 2 intake, 3 jembatan
 		if(jenis == 1){
-			marker[i] = map.addMarker({
+			var bangunanMarker = map.addMarker({
 			  lat: lat,
 			  lng: lng,
 			  title: 'Pintu Air',
@@ -93,11 +106,12 @@ window.onload = function(e){
 			  anchor:[0,32],
 			  icon: iconBase + 'icon-pintuair.png',
 			  click: function(e) {
-				infowindow.open(map, this); 
+				//infowindowBangunan.open(map, this); 
 			  }
 			});
+			bangunanMarker.content = infoBangunan(id,kondisi);
 		} else if (jenis == 2){
-			map.addMarker({
+			var bangunanMarker = map.addMarker({
 			  lat: lat,
 			  lng: lng,
 			  title: 'Intake',
@@ -106,21 +120,29 @@ window.onload = function(e){
 			  anchor:[0,16],
 			  icon: iconBase + 'icon-intake.png',
 			  click: function(e) {
-				infowindow.open(map, this);
+				//infowindowBangunan.open(map, this);
 			  }
 			});
+			bangunanMarker.content = infoBangunan(id,kondisi);
 		} else {
-			map.addMarker({
+			var bangunanMarker = map.addMarker({
 			  lat: lat,
 			  lng: lng,
 			  title: 'Jembatan',
 			  size:[20,20],
 			  icon: iconBase + 'icon-jembatan.png',
 			  click: function(e) {
-				infowindow.open(map, this); 
+				//infowindowBangunan.open(map, this); 
 			  }
 			});
+			bangunanMarker.content = infoBangunan(id,kondisi);
 		}
+		google.maps.event.addListener(bangunanMarker, 'click', function() {
+			infowindow.setContent(this.content);
+			infowindow.open(map,this);
+			//alert('test');
+		});
+		
 	}
 	
 	//SODETAN SEKUNDER
@@ -302,7 +324,7 @@ window.onload = function(e){
 								<input type="text" class="form-control" value="{{ $datas[0]->ls_tersier }}">
 							</div>
 						</div>
-			
+			<button type="button" class="btn btn-primary btn-flat">Simpan</button> 
 			</div>
 			<!-- /.box-body -->
 		</div>
@@ -328,4 +350,7 @@ window.onload = function(e){
 		</div>				<!-- <div id="over_map">keterangan</div> -->
 	</div>
 </div>
+
+<a href="{{ url('irigasi') }}"> <button type="button" class="btn btn-primary btn-flat">Kembali</button> </a>
+
 @endsection

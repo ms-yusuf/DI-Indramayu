@@ -11,7 +11,10 @@
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
-
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">{{ trans('adminlte_lang::message.togglenav') }}</span>
+        </a>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -35,7 +38,7 @@
                                 <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small>
+                                    <!-- <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small> -->
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -47,7 +50,7 @@
                                     <a href="{{ url('/logout') }}" class="btn btn-default btn-flat" id="logout"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ trans('adminlte_lang::message.signout') }}
+										 Keluar <!--{{ trans('adminlte_lang::message.signout') }}-->
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

@@ -30,17 +30,7 @@ yang dipake cuma ID 7 | changed, struktur database diubah jadi ada 2 ID : ID utk
 Attribut yg kurang dari laporan : 
 Daerah Irigasi : 
 jumlah bangunan(breakdown per item),panjang saluran,kewenangan,luas areal,luas saluran sekunder, luas saluran tersier, keterangan lain
+Tahun Pembuatan,
 Saluran :
 Bangunan : 
-
---------------------------------------------------------------------------------------------------------------------------------
-ADE M.
-Kewenangan : (tambah field baru di tablenya)
-Luas Areal : (tambah field baru di tablenya)
-Jumlah Bangunan : (query count tabel bangunan_irigasi) where DI=$ID
-  Pintu Air : 
-  Intake : 
-Jumlah Saluran : 
-  Sekunder :
-  Tersier :
-Panjang Saluran, Luas Saluran
+Dimensi, Kondisi, Foto

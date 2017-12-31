@@ -7,11 +7,11 @@
     <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>No</th>
+        <th>Daerah</th>
         <th>Jenis</th>
         <th>Kondisi</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
+        <!-- <th>Koordinat</th> -->
         <th>Dimensi</th>
         <th>Foto</th>
         <th>Keterangan</th>
@@ -21,10 +21,14 @@
     <tbody>
       @foreach($datas as $data)
       <tr>
-        <td>{{$data['id']}}</td>
+        <!--<td>{{$data['id']}}</td>-->
+        <td>{{$i}}</td>
+        <td>JOIN NAMA <br> {{$data['daerah_irigasi']}}</td>
         <td>
 			@if ($data['jenis'] == 1)
 				Pintu air
+			@elseif ($data['jenis'] == 2)
+				Intake			
 			@elseif ($data['jenis'] == 2)
 				Jembatan
 			@else
@@ -40,9 +44,8 @@
 				Tidak ada data
 			@endif
 		</td>
-        <td>{{$data['lat']}}</td>
-        <td>{{$data['lng']}}</td>
-        <td>{{$data['dimensi']}}</td>
+        <!-- <td>{{$data['lat']}}, {{$data['lng']}}</td> -->
+        <td>{{$data['dimensi']}} M </td>
         <td><img width="75px" height="90px" src="{{ URL::to('/') }}/images/{{$data['foto']}}"></td>
         <td>{{$data['keterangan']}}</td>
         <td><a href="{{action('BangunanController@edit', $data['id'])}}" class="btn btn-warning">Edit</a>
