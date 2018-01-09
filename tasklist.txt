@@ -14,11 +14,11 @@ Tasklist
 Note :
 1. Situ Bolang ada 2 polygon jadi ada 2 data daerah irigasi utk situ bolang,
 yang dipake cuma ID 7 | changed, struktur database diubah jadi ada 2 ID : ID utk polygon & daerah irigasi
-2. ID Hardcode penanda untuk bangunan : 
+2. ID Hardcode penanda untuk bangunan : jenis
 	1. Pintu Air
 	2. Intake
 	3. Jembatan
-3. ID Hardcode penanda untuk kondisi bangunan :
+3. ID Hardcode penanda untuk kondisi bangunan : kondisi
 	1. Baik
 	2. Rusak
 4. Urutan drawing : polygon (bottom), polylines, marker(top) biar clickable nda ketutup polygon

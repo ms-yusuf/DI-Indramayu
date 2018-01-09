@@ -43,7 +43,13 @@ class BangunanController extends Controller
      */
     public function create()
     {
-		return view('bangunan.create');
+         $datas1 = DB::table('bangunan_irigasi AS b')
+        ->join('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
+        ->select('b.id', 'd.nama AS nama')
+        ->groupBy('d.id_di')
+        ->get();
+        $datas1 = $datas1->toArray();
+		return view('bangunan.create', compact('datas1'));
     }
 
     /**
@@ -54,7 +60,8 @@ class BangunanController extends Controller
      */
     public function store(Request $request)
     {	
-        $data = new Bangunan([
+        dd($request);
+        /*$data = new Bangunan([
           'jenis' => $request->get('jenis'),
           'kondisi' => $request->get('kondisi'),
           'lat' => $request->get('lat'),
@@ -63,8 +70,9 @@ class BangunanController extends Controller
           'foto' => $request->get('foto'),
           'keterangan' => $request->get('keterangan')
         ]);
-        $data->save();
-        return redirect('/bangunan');
+
+        $data->save();*/
+        /*return redirect('/bangunan');*/
     }
 
     /**
@@ -86,8 +94,25 @@ class BangunanController extends Controller
      */
     public function edit($id)
     {
+        $datas1 = DB::table('bangunan_irigasi AS b')
+        ->join('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
+        ->select('b.id', 'd.nama AS nama')
+        ->groupBy('d.id_di')
+        ->get();
+        $datas1 = $datas1->toArray();
+
+        //dd($datas1);
+
+        $datas2 = DB::table('bangunan_irigasi AS b')
+        ->join('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
+        ->where('b.id',$id)
+        ->get();
+        $datas2 = $datas2->toArray();
+
+       // dd($datas2);
+
 		$data = Bangunan::find($id);
-        return view('bangunan.edit', compact('data','id'));
+        return view('bangunan.edit', compact('data','id', 'datas1', 'datas2'));
     }
 
     /**
@@ -99,15 +124,24 @@ class BangunanController extends Controller
      */     	
     public function update(Request $request, $id)
     {
+
+        /*dd($request);*/
         $data = Bangunan::find($id);
-        $data->jenis = $request->get('jenis');
-        $data->kondisi = $request->get('kondisi');
-        $data->lat = $request->get('lat');
-        $data->lng = $request->get('lng');
-        $data->dimensi = $request->get('dimensi');
-        $data->foto = $request->get('foto');
-        $data->keterangan = $request->get('keterangan');
+
+        $data->jenis        = $request->get('jenis');
+        $data->kondisi      = $request->get('kondisi');
+        $data->lat          = $request->get('lat');
+        $data->lng          = $request->get('lng');
+        $data->dimensi      = $request->get('dimensi');
+        $data->foto         = $request->get('foto');
+        $data->keterangan   = $request->get('keterangan');
+        if ($request->hasFile('images')) {
+            $file = $request->file('photo');
+            $data->foto = $file;
+        }
+
         $data->save();
+
         return redirect('/bangunan');
     }
 

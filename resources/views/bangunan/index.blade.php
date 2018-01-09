@@ -4,6 +4,9 @@
 @extends('bangunan')
 
 @section('content')
+    <a href="{{ URL::to('/bangunan/create') }}" class="btn btn-primary">Tambah Data</a>
+    <br>
+    <br>
     <table class="table table-striped">
     <thead>
       <tr>
