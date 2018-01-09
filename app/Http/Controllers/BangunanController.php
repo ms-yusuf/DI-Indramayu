@@ -60,19 +60,24 @@ class BangunanController extends Controller
      */
     public function store(Request $request)
     {	
-        dd($request);
-        /*$data = new Bangunan([
-          'jenis' => $request->get('jenis'),
-          'kondisi' => $request->get('kondisi'),
-          'lat' => $request->get('lat'),
-          'lng' => $request->get('lng'),
-          'dimensi' => $request->get('dimensi'),
-          'foto' => $request->get('foto'),
-          'keterangan' => $request->get('keterangan')
-        ]);
+        /*dd($request);*/
+        $data = new Bangunan;
 
-        $data->save();*/
-        /*return redirect('/bangunan');*/
+        $data->daerah_irigasi   = $request->get('daerah_irigasi');
+        $data->jenis            = $request->get('jenis');
+        $data->kondisi          = $request->get('kondisi');
+        $data->lat              = $request->get('lat');
+        $data->lng              = $request->get('lng');
+        $data->dimensi          = $request->get('dimensi');
+        $data->foto             = $request->get('foto');
+        $data->keterangan       = $request->get('keterangan');
+        if ($request->hasFile('images')) {
+            $file = $request->file('images');
+            $data->foto = $file;
+        }
+
+        $data->save();
+        return redirect('/bangunan');
     }
 
     /**

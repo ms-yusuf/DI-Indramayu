@@ -52,7 +52,7 @@ window.onload = function(e){
             <br>
             <br>
 <div class="container">
-  <form method="post" action="store" enctype="multipart/form-data">
+  <form method="post" action="{{route('bangunan.store')}}" enctype="multipart/form-data">
    {!! csrf_field() !!}
    <div class="form-group row">
           <label for="smFormGroupInput" class="col-sm-2 col-form-label col-form-label-sm">Daerah Irigasi</label>
@@ -66,7 +66,7 @@ window.onload = function(e){
         </div>
     <div class="form-group row">
   
-      <input name="_method" type="hidden" value="PATCH">
+     <!--  <input name="_method" type="hidden" value="PATCH"> -->
       <label for="smFormGroupInput" class="col-sm-2 col-form-label col-form-label-sm">Jenis Bangunan</label>
       <div class="col-sm-10">
        
