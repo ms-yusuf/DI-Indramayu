@@ -21,14 +21,10 @@ window.onload = function(e){
 	  lng: 108.327932,
 	  zoom: 11,
 	  click: function(e) {
-		alert(e.latLng);
+		//alert(e.latLng);
 	  },
 	});
-
-     // lat: map.getCenter().lat(),
-     // lng: map.getCenter().lng(),
 	
-
 	//bangunan
 	// for(var i=0; i<bangunan.length;i++){
 		// var jenis = bangunan[i]['jenis'];
@@ -119,7 +115,6 @@ window.onload = function(e){
 	function isInArray(value, array) {
 		return array.indexOf(value) > -1;
 }
-	
 	
 	///BOUNDARY DAERAH IRIGASI
 	var sudah = [];

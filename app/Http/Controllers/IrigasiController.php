@@ -61,8 +61,7 @@ class IrigasiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-		
+    {		
         $jml_bangunan = DB::table('bangunan_irigasi')
                 ->where('daerah_irigasi', $id)
                 ->count();
@@ -88,9 +87,12 @@ class IrigasiController extends Controller
                 ->where('daerah_irigasi', $id)
                 ->where('jenis', 3) 
                 ->count();		
-		
-		$bangunan = DB::table('bangunan_irigasi')->where('daerah_irigasi',$id)->get();
+
+		$bangunan = DB::table('bangunan_irigasi')
+		//->join('foto_bangunan', 'foto_bangunan.id_bangunan', '=', 'bangunan_irigasi.id')
+		->where('daerah_irigasi',$id)->get();
 		$bangunan = $bangunan->toArray();
+		//dd($bangunan);
 		
 		$sodetan_tersier = DB::table('sodetan')->where([
 		['jenis', '=', 3],
@@ -106,9 +108,9 @@ class IrigasiController extends Controller
 		
 		$datas = DB::table('daerah_irigasi')->where('id_di',$id)->get();
 		$datas = $datas->toArray();
-		//$datas = Irigasi::where('id',$id)->toArray(); cara wherenya salah
+				//dd($datas);
         return view('irigasi.show', 
-            compact('datas','sodetan_tersier','sodetan_sekunder','bangunan', 'jml_bangunan', 'jml_pintu_air', 'jml_intake', 'jml_sekunder', 'jml_tersier', 'jml_saluran')
+            compact('datas','sodetan_tersier','sodetan_sekunder','bangunan','foto','jml_bangunan', 'jml_pintu_air', 'jml_intake', 'jml_sekunder', 'jml_tersier', 'jml_saluran')
 		);
     }
 

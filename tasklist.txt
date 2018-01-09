@@ -6,10 +6,10 @@ Tasklist
 3. (done) Label di daerah irigasi 
 4. Fungsi pencarian 
 5. Input Data
-6. Legenda, mungkin pake overlay
+6. (done)Legenda, mungkin pake overlay
 7. Toggle turn on / off
-8. Auth, pentingkah? 
-9. Detail Bangunan
+8. Detail Bangunan
+9. Press tab muncul box sebelah kanan #	control-sidebar-home-tab
 
 Note :
 1. Situ Bolang ada 2 polygon jadi ada 2 data daerah irigasi utk situ bolang,

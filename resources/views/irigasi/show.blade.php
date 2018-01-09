@@ -29,23 +29,15 @@ window.onload = function(e){
 	  click: function(e) {
 		//alert(e.latLng);
 	  },
-	});
-	
-		
-	///BOUNDARY DAERAH IRIGASI
-	for(var i = 0; i < daerah_irigasi.length; i++){
-		var warna = ['red','blue','white'];
-		daerah[i] = tambahDaerah(daerah_irigasi[i]['id'],daerah_irigasi[i]['koordinat'],warna[i],daerah_irigasi[i]['nama']);
-	}
-    function tambahDaerah(id,dataKoordinat,warna,nama){
+	});	
+
+    function tambahDaerah(id,dataKoordinat,nama){
 		var array = JSON.parse("[" + dataKoordinat + "]");
         boundaryDaerah =  map.drawPolygon({
 		  paths: array,
-		  //strokeColor: '#BBD8E9',
 		  strokeColor: 'Black',
 		  strokeOpacity: 1,
 		  strokeWeight: 1,
-		  //fillColor: warna,
 		  fillColor: 'white',
 		  fillOpacity: 0.1,
 			click: function(e) {
@@ -56,37 +48,51 @@ window.onload = function(e){
 	return boundaryDaerah;
     }
 	
+	//////////////////MARKER BANGUNAN
+	function infoBangunan(id,kondisi,dimensi,foto){
+		if(kondisi==2){
+			var kondisi = 'Rusak';
+		}else{
+			var kondisi = 'Baik';
+		}
+		contentStringBangunan = '<div id="content">'+
+		  '<div id="siteNotice">'+
+		  '</div>'+
+		  '<h1 id="firstHeading" class="firstHeading">Panel Info</h1>'+
+		  '<div id="bodyContent">'+
+		  '<b>Keterangan Bangunan</b>' + '<br>' +
+		  'Kondisi : ' + kondisi + '<br>'
+		  'Dimensi : '+ dimensi+' &nbsp  M'+ '<br>' +
+		  'Foto <br>';
+		
+		if (!foto) {
+			contentStringBangunan += 'Tidak ada foto <br>';
+		} else {
+			//test.jpg;test2.
+			fotoArray = foto.split(";");
+			 for(var f = 0; f<fotoArray.length; f++){
+				
+				contentStringBangunan +=
+				'<img width="150px" height="150px" src="'+iconBase+fotoArray[f]+'">';	
+			}
+		}
+		
+		contentStringBangunan +=
+		  '<br><br>'+
+		  '<a href="{{ url("bangunan") }}/'+id+'/edit"> <button type="button" class="btn btn-primary btn-flat">Edit</button> </a>'+
+		  '</div>'+
+		  '</div>';
+		  return contentStringBangunan;
+	}
+	
+	///BOUNDARY DAERAH IRIGASI
+	for(var i = 0; i < daerah_irigasi.length; i++){
+		daerah[i] = tambahDaerah(daerah_irigasi[i]['id'],daerah_irigasi[i]['koordinat'],daerah_irigasi[i]['nama']);
+	}	  
+	
 	//bangunan
 	infowindow = new google.maps.InfoWindow();
 	
-	//////////////////MARKER BANGUNAN
-	function infoBangunan(id,kondisi){
-	if(kondisi==2){
-		var kondisi =       'Kondisi : <select name="kondisi">' +
-	  '<option value="1">Baik</option>'+
-	'<option value="2" selected>Rusak</option>'+
-	'</select> <br> ';
-	}else{
-	    var kondisi =       'Kondisi : <select name="kondisi">' +
-	  '<option value="1" selected>Baik</option>'+
-	'<option value="2">Rusak</option>'+
-	'</select> <br> ';
-	}
-	
-	contentStringBangunan = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Panel Info</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Keterangan Bangunan</b><br>' +
-      '<form action="" method="post">' + kondisi + 
-      'Dimensi : <input type="text" value="'+dimensi+'">  M<br>'+
-      'Foto</p> <br> <input type="file"> '+
-      '</form>'+
-      '</div>'+
-      '</div>';
-	  return contentStringBangunan;
-	  }
 	for(var i=0; i<bangunan.length;i++){
 		var id = bangunan[i]['id'];
 		var kondisi = bangunan[i]['kondisi'];
@@ -94,7 +100,7 @@ window.onload = function(e){
 		var jenis = bangunan[i]['jenis'];
 		var lat = bangunan[i]['lat'];
 		var lng = bangunan[i]['lng'];		
-		
+		var foto = bangunan[i]['foto'];
 		//1 pintu air, 2 intake, 3 jembatan
 		if(jenis == 1){
 			var bangunanMarker = map.addMarker({
@@ -104,12 +110,9 @@ window.onload = function(e){
 			  size:[15,15],
 			  origin:[0,0],
 			  anchor:[0,32],
-			  icon: iconBase + 'icon-pintuair.png',
-			  click: function(e) {
-				//infowindowBangunan.open(map, this); 
-			  }
+			  icon: iconBase + 'icon-pintuair.png'
 			});
-			bangunanMarker.content = infoBangunan(id,kondisi);
+			bangunanMarker.content = infoBangunan(id,kondisi,dimensi,foto);
 		} else if (jenis == 2){
 			var bangunanMarker = map.addMarker({
 			  lat: lat,
@@ -119,11 +122,8 @@ window.onload = function(e){
 			  origin:[0,0],
 			  anchor:[0,16],
 			  icon: iconBase + 'icon-intake.png',
-			  click: function(e) {
-				//infowindowBangunan.open(map, this);
-			  }
 			});
-			bangunanMarker.content = infoBangunan(id,kondisi);
+			bangunanMarker.content = infoBangunan(id,kondisi,dimensi,foto);
 		} else {
 			var bangunanMarker = map.addMarker({
 			  lat: lat,
@@ -131,18 +131,14 @@ window.onload = function(e){
 			  title: 'Jembatan',
 			  size:[20,20],
 			  icon: iconBase + 'icon-jembatan.png',
-			  click: function(e) {
-				//infowindowBangunan.open(map, this); 
-			  }
 			});
-			bangunanMarker.content = infoBangunan(id,kondisi);
+			bangunanMarker.content = infoBangunan(id,kondisi,dimensi,foto);
 		}
+		
 		google.maps.event.addListener(bangunanMarker, 'click', function() {
 			infowindow.setContent(this.content);
 			infowindow.open(map,this);
-			//alert('test');
 		});
-		
 	}
 	
 	//SODETAN SEKUNDER
@@ -156,12 +152,12 @@ window.onload = function(e){
 		map.drawPolyline({
 		  path: path2[i],
 		  strokeColor: 'blue',
-		  strokeOpacity: 0.3,
-		  strokeWeight: 4,
+		  strokeOpacity: 0.4,
+		  strokeWeight: 5,
 		 click: function(clickEvent) {
 			var position = clickEvent.latLng;
-			infowindow.setPosition(position);
-			infowindow.open(map.map);
+			//infowindow.setPosition(position);
+			//infowindow.open(map.map);
 		  }
 		});	
 	}
@@ -178,15 +174,15 @@ window.onload = function(e){
 		  path: path3[i],
 		  strokeColor: 'red',
 		  strokeOpacity: 0.4,
-		  strokeWeight: 8,
+		  strokeWeight: 5,
 		 click: function(clickEvent) {
 			var position = clickEvent.latLng;
-			infowindow.setPosition(position);
-			infowindow.open(map.map);
+			//infowindow.setPosition(position);
+			//infowindow.open(map.map);
 		  }
 		});	
 	}
-	var legend = document.getElementById('legend');
+	//var legend = document.getElementById('legend');
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);	
 }
 </script>
@@ -197,7 +193,7 @@ window.onload = function(e){
 		<!-- Default box -->
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">Informasi Daerah Irigasi</h3>
+				<h3 class="box-title">Informasi Daerah Irigasi {{ $datas[0]->nama }}</h3>
 				<div class="box-tools pull-right">
 					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 						<i class="fa fa-minus"></i></button>
@@ -301,7 +297,7 @@ window.onload = function(e){
 							</div>
 						</div>
 						<br>
-						<div class="row">
+						<!--<div class="row">
 							<div class="col-md-2">
 								<p>Luas Saluran</p>
 							</div>
@@ -323,7 +319,7 @@ window.onload = function(e){
 							<div class="col-md-4">
 								<input type="text" class="form-control" value="{{ $datas[0]->ls_tersier }}">
 							</div>
-						</div>
+						</div>-->
 			<button type="button" class="btn btn-primary btn-flat">Simpan</button> 
 			</div>
 			<!-- /.box-body -->
@@ -334,7 +330,7 @@ window.onload = function(e){
 </div>	
 
 <div class="panel panel-default">
-	<div class="panel-heading">Daerah Irigasi</div>
+	<div class="panel-heading"><h4 class="box-title">Peta Daerah Irigasi {{ $datas[0]->nama }}</h3> </div>
 	<div class="panel-body wrapper-map">
 		<!-- <div id="floating-panel"></div> -->
 		<div id="map"></div>

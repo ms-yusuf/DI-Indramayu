@@ -13,16 +13,27 @@ class BangunanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	 
+	 public function index()
     {
 		//PINTU AIR
-		$bangunan = DB::table('bangunan_irigasi')->where('jenis',1)->get();
-		$bangunan = $bangunan->toArray();
+		$datas = DB::table('bangunan_irigasi AS b')
+		->join('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
+		->select('b.id','b.jenis','b.kondisi','b.lat','b.lng','b.dimensi','b.foto','b.keterangan','d.nama AS nama')
+		->groupBy('b.id')
+		//->where('b.jenis',1)
+		->get();
+		$datas = $datas->toArray();
+		//dd($datas);
 		$i = 1;
 		
-        $datas = Bangunan::all()->toArray();
+        //$datas = Bangunan::all()->toArray();
 		//dd($datas);
-        return view('bangunan.index', compact('datas','bangunan','i'));
+     return view('bangunan.index', compact('datas','i'));
     }
 
     /**
