@@ -1,13 +1,11 @@
 <!-- create.blade.php -->
-
-@extends('adminlte::layouts.app')
 @extends('bangunan')
-
 @section('content')
+	<h1> Data Bangunan Irigasi </h1>
     <a href="{{ URL::to('/bangunan/create') }}" class="btn btn-primary">Tambah Data</a>
     <br>
     <br>
-    <table class="table table-striped">
+    <table id="bangunantabel" class="table table-striped">
     <thead>
       <tr>
         <th>No</th>
@@ -18,7 +16,7 @@
         <th>Dimensi</th>
         <th>Foto</th>
         <th>Keterangan</th>
-        <th colspan="2">Action</th>
+        <th>Aksi</th>
       </tr>
     </thead>	
     <tbody>
@@ -48,19 +46,30 @@
 			@endif
 		</td>
         <!-- <td>{{$data->lat}}, {{$data->lng}}</td> -->
-        <td>{{$data->dimensi}} M </td>
-        <td><img width="75px" height="90px" src="{{ URL::to('/') }}/images/{{$data->foto}}"></td>
+        <td>{!! ($data->dimensi != '') ? $data->dimensi.'M' : 'Tidak ada data' !!}  </td>
+        <td>
+			@php
+					$url = $app->make('url')->to('/');
+					if($data->foto != ''){
+						$fotostring = $data->foto;
+						$fotos = explode(";", $fotostring);
+						foreach($fotos as $foto){
+							echo "<a href='".$url."/images/upload/".$foto."'> <img class='img-bangunan-form' src='".$url."/images/upload/".$foto."'> </a>";
+						}
+					} else {
+						echo "Tidak ada foto.";
+						echo "<hr>";
+					}
+		@endphp
+		</td>
         <td>{{$data->keterangan}}</td>
-        <td><a href="{{action('BangunanController@edit', $data->id)}}" class="btn btn-warning">Edit</a>
-		<a href="{{action('IrigasiController@edit', $data->id)}}" class="btn"><img src="{{ URL::to('/') }}/images/liat-map.png" width="40px" heigth="25px"></a>
-		</td>
 		<td>
-          <form action="{{action('BangunanController@destroy', $data->id)}}" method="post">
-            {{csrf_field()}}
-            <input name="_method" type="hidden" value="DELETE">
-            <button class="btn btn-danger" type="submit">Delete</button>
-          </form>
+			<a href="{{action('BangunanController@edit', $data->id)}}"><img src="{{asset('images/modify.png')}}" height="30px" width="30px"></a>
+			<a href="{{action('BangunanController@destroy', $data->id)}}"><img src="{{asset('images/delete.png')}}" height="30px" width="30px"></a>
+
 		</td>
+		
+		
       </tr>
 	@endforeach
     </tbody>

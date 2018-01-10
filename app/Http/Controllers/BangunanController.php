@@ -5,6 +5,7 @@ namespace pupr\Http\Controllers;
 use Illuminate\Http\Request;
 use pupr\Bangunan;
 use DB;
+use DataTables;
 
 class BangunanController extends Controller
 {
@@ -36,6 +37,11 @@ class BangunanController extends Controller
      return view('bangunan.index', compact('datas','i'));
     }
 
+	public function bangunandata()
+    {
+      return Datatables::of(Bangunan::query())->make(true);
+    }
+	
     /**
      * Show the form for creating a new resource.
      *
@@ -61,23 +67,35 @@ class BangunanController extends Controller
     public function store(Request $request)
     {	
         /*dd($request);*/
+	
         $data = new Bangunan;
-
+		$images = array();
+		
         $data->daerah_irigasi   = $request->get('daerah_irigasi');
         $data->jenis            = $request->get('jenis');
         $data->kondisi          = $request->get('kondisi');
         $data->lat              = $request->get('lat');
         $data->lng              = $request->get('lng');
         $data->dimensi          = $request->get('dimensi');
-        $data->foto             = $request->get('foto');
         $data->keterangan       = $request->get('keterangan');
-        if ($request->hasFile('images')) {
-            $file = $request->file('images');
-            $data->foto = $file;
-        }
-
+		
+		 if ($request->hasFile('images')) {
+			if($files=$request->file('images')){
+				foreach($files as $key => $file){
+					$name=$file->getClientOriginalName();
+					$ekstensi = substr($name, strpos($name, ".") + 1);    
+					$name = $data->jenis.$data->daerah_irigasi.time().$key.'.'.$ekstensi;
+					$file->move('images\upload',$name);
+					$images[]=$name;
+				}
+			}
+			$images = implode(';',$images);
+			$data->foto = $images;
+		 }
+		//dd($data);
         $data->save();
         return redirect('/bangunan');
+		
     }
 
     /**
@@ -99,25 +117,20 @@ class BangunanController extends Controller
      */
     public function edit($id)
     {
-        $datas1 = DB::table('bangunan_irigasi AS b')
-        ->join('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
-        ->select('b.id', 'd.nama AS nama')
-        ->groupBy('d.id_di')
+        $dataDI = DB::table('daerah_irigasi AS d')
+        ->select('d.nama AS nama','d.id_di AS id')
+        ->groupBy('id_di')
         ->get();
-        $datas1 = $datas1->toArray();
+        $dataDI = $dataDI->toArray();
 
-        //dd($datas1);
-
-        $datas2 = DB::table('bangunan_irigasi AS b')
-        ->join('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
+        $dataBangunan = DB::table('bangunan_irigasi AS b')
+        ->leftjoin('daerah_irigasi AS d','d.id_di','=','b.daerah_irigasi')
         ->where('b.id',$id)
         ->get();
-        $datas2 = $datas2->toArray();
-
-       // dd($datas2);
+        $dataBangunan = $dataBangunan->toArray();
 
 		$data = Bangunan::find($id);
-        return view('bangunan.edit', compact('data','id', 'datas1', 'datas2'));
+        return view('bangunan.edit', compact('data','id', 'dataDI', 'dataBangunan'));
     }
 
     /**
@@ -129,26 +142,64 @@ class BangunanController extends Controller
      */     	
     public function update(Request $request, $id)
     {
-
-        /*dd($request);*/
-        $data = Bangunan::find($id);
-
+		$aksi = $request->get('aksi');
+		$data = Bangunan::find($id);
+		/*dd($request);*/
+		
+		if($aksi == 'uploadfoto'){
+			if ($request->hasFile('images')) {
+				$fotolama = $data->foto;
+				
+				if($files=$request->file('images')){
+					foreach($files as $key => $file){
+						$name=$file->getClientOriginalName();
+						$ekstensi = substr($name, strpos($name, ".") + 1);    
+						$name = $data->jenis.$data->daerah_irigasi.time().$key.'.'.$ekstensi;
+						$file->move('images\upload',$name);
+						$images[]=$name;
+					}
+				}
+				$fotobaru = implode(';',$images);
+				if($fotolama != '')
+					$fotobaru = $fotobaru.';'.$fotolama;	
+				$data->foto = $fotobaru;
+				$data->save();
+			}
+			return redirect('/bangunan/'.$id.'/edit');
+		//dd($data);
+		} else {
+        $data->daerah_irigasi        = $request->get('daerah_irigasi');
         $data->jenis        = $request->get('jenis');
         $data->kondisi      = $request->get('kondisi');
         $data->lat          = $request->get('lat');
         $data->lng          = $request->get('lng');
         $data->dimensi      = $request->get('dimensi');
-        $data->foto         = $request->get('foto');
         $data->keterangan   = $request->get('keterangan');
-        if ($request->hasFile('images')) {
-            $file = $request->file('photo');
-            $data->foto = $file;
-        }
-
         $data->save();
-
-        return redirect('/bangunan');
+        return redirect('/bangunan/'.$id.'/edit');
+		}
     }
+	
+	public function hapusfoto($id, $foto){
+		$data = Bangunan::find($id);
+		$fotolama = $data->foto;
+		$fotolama = explode(';',$fotolama);
+		// print_r($fotolama); echo "<br>";
+		$key = array_search($foto, $fotolama);
+		unset($fotolama[$key]);
+		$fotobaru = implode(';',$fotolama);
+		// echo $fotobaru;
+		$data->foto=$fotobaru;
+		$data->save();
+		//print_r($fotobaru);
+		$image_path = "/images/upload/".$foto;
+		chown("/images/upload/", 666);
+		if(file_exists($image_path)) {
+			unlink($image_path);
+			File::delete($image_path);
+		}
+		return redirect('/bangunan/'.$id.'/edit');
+	}
 
     /**
      * Remove the specified resource from storage.

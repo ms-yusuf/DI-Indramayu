@@ -34,10 +34,13 @@ Route::get('/data', function () {
 	return view('data');
 });
 
-Route::get('/bangunan', function () {
-    return view('bangunan');
-});
 Route::resource('bangunan', 'BangunanController');
+Route::get('/bangunan/hapus/{id}', 'BangunanController@destroy');
+Route::get('/bangunan', 'BangunanController@index')
+	->name('bangunan'); 
+Route::get('/bangunan/hapusfoto/{id}/{foto}', 'BangunanController@hapusfoto');
+Route::get('/bangunan/data', 'BangunanController@bangunandata')
+	->name('bangunan.data');
 
 Route::get('/irigasi', function () {
     return view('irigasi');

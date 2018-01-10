@@ -3,10 +3,16 @@
   height: 490px;
 }
 
+#mapform {
+  width: 70%;
+  height: 250px;
+}
+
 .wrapper-map{ 
 	position: relative;
   width: 100%; 
 }
+
 #over_map{
 	background-color:grey;
 	position: absolute;
@@ -64,4 +70,35 @@
   width: 24px;
   height: 24px;
   margin-right: 7px;
+}
+
+.img-del{
+  width: 24px;
+  height: 24px;
+  margin-left:-31px;
+  margin-top:7px;
+  position:absolute;
+  opacity: 0.8;
+}
+
+.img-del:hover{
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.img-bangunan{
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  margin:5px;
+}
+.img-bangunan-form{
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  margin:5px;
 }

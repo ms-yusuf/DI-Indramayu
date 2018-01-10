@@ -5,6 +5,7 @@
 window.onload = function(e){ 
 	var APP_URL = {!! json_encode(url('/')) !!}
 	var iconBase = APP_URL+'/images/';
+	var uploadpath = APP_URL+'/images/upload/';
 	var daerah_irigasi = {!! json_encode($datas) !!}; //this should dump a javascript array object which does not need any extra interperting.
 	var sodetan_sekunder = {!! json_encode($sodetan_sekunder) !!};
 	var sodetan_tersier = {!! json_encode($sodetan_tersier) !!};
@@ -73,7 +74,7 @@ window.onload = function(e){
 			 for(var f = 0; f<fotoArray.length; f++){
 				
 				contentStringBangunan +=
-				'<img width="150px" height="150px" src="'+iconBase+fotoArray[f]+'">';	
+				'<a href="'+uploadpath+fotoArray[f]+'"><img class="img-bangunan" width="150px" height="150px" src="'+uploadpath+fotoArray[f]+'"></a>';	
 			}
 		}
 		
@@ -195,7 +196,7 @@ window.onload = function(e){
 			<div class="box-header">
 				<h3 class="box-title">Informasi Daerah Irigasi {{ $datas[0]->nama }}</h3>
 				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="false" title="Collapse">
 						<i class="fa fa-minus"></i></button>
 				</div>
 			</div>
